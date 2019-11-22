@@ -11,17 +11,5 @@
 	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/selenium/libs/guava-25.0-jre.jar"/>
 	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/selenium/libs/okhttp-3.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/selenium/libs/okio-1.14.0.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/extentreports-4.0.9.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/extentreports-2.41.2.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/freemarker-2.3.23.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/jsoup-1.8.3.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/mongodb-driver-3.0.4.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/sqlite-jdbc-3.8.11.1.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/testng-6.9.9.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/testng/ant-1.7.0.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/testng/bsh-2.0b4.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/testng/jcommander-1.48.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/testng/junit-4.10.jar"/>
-	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/extentreports/testng/snakeyaml-1.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
