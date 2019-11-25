@@ -1,11 +1,15 @@
 package qa.test.web.com.juniorsbrissa.test.page;
 
+import java.io.IOException;
+
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import qa.test.web.basePage.BasePage;
+import qa.test.web.basePage.TestRunner;
 
 public class PageHome extends BasePage {
 
@@ -92,4 +96,74 @@ public class PageHome extends BasePage {
 	
 	@FindBy(xpath = "//div[@id='rsvpPlugin']//div[@class='rsvpAdditionalAttendee'][1]//input[@value='N']")
 	WebElement rsvpFieldAdditionalRadioNao;
+	
+	/*
+	 * Página: Home
+	 * Metodos
+	 */
+	
+	public void insertValueRSVP(String codigoRSVP) throws IOException {
+		
+		//Verificar se o campo 'rsvpInputCodigoRSVP' existe na tela
+		if (elementExist(rsvpInputCodigoRSVP)) {
+			
+			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Campo 'Código RSVP' encontrado com sucesso");
+			
+			try {
+				//Preencher campo 'rsvpInputCodigoRSVP'
+				sendkeys(rsvpInputCodigoRSVP, codigoRSVP);
+			} catch (Exception e) {
+				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao inserir informação 'Código RSVP'");
+				Assert.fail();
+			}
+			
+		} else {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Campo 'Código RSVP' não encontrado");
+			Assert.fail();
+		}
+		
+	}
+	
+	public void clickButtonVerificarCodigo() throws IOException {
+		
+		// Verificar botão 'rsvpButtonVerificarCodigo' existe
+		if (elementExist(rsvpButtonVerificarCodigo)) {
+			
+			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Botão 'Verificar Código' encontrado com sucesso");
+			
+			try {
+				//Preencher campo 'rsvpInputCodigoRSVP'
+				click(rsvpInputCodigoRSVP);
+			} catch (Exception e) {
+				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao clicar no botão 'Verificar Código'");
+				Assert.fail();
+			}
+			
+		} else {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Botão 'Verificar Código' não encontrado");
+			Assert.fail();
+		}
+		
+	}
+	
+	public void validadeFieldNameRSVP(String name) throws IOException {
+		
+		if (elementExist(rsvpFieldName)) {
+			
+			String valueFieldName = rsvpFieldName.getText();
+			
+			if (valueFieldName == name) {
+				TestRunner.addStepPassed(BasePage.getClassMethod(this), "Campo 'Nome' encontrado com valor " + valueFieldName);
+			} else {
+				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Nomes divergem - Coletado: " + valueFieldName +" // Informado: " + name);
+				Assert.fail();
+			}
+			
+		} else {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Campo 'Nome' não encontrado");
+			Assert.fail();
+		}
+		
+	}
+	
 }
