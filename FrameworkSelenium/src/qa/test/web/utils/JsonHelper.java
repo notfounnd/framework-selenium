@@ -83,7 +83,7 @@ public class JsonHelper {
 			
 			writeFile = new FileWriter(System.getProperty("user.dir") + "\\qa.test.web.testData\\" + fileName + ".json");
 			
-			// Escreve no arquivo conteudo do Objeto JSON
+			// Escreve no arquivo o conteudo do Objeto JSON
 			writeFile.write(jsonObject.toJSONString());
 			writeFile.close();
 			
