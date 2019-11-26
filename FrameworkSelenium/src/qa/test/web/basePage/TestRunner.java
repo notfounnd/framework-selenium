@@ -1,5 +1,6 @@
 package qa.test.web.basePage;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -13,163 +14,250 @@ import org.junit.runner.Request;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+import com.relevantcodes.extentreports.ExtentReports;
+
+import qa.test.web.utils.BaseExtentReports;
+import qa.test.web.utils.FolderHelper;
+import qa.test.web.utils.ScreenShot;
 import qa.test.web.utils.TextHelper;
 
+@SuppressWarnings({"unused"})
 public class TestRunner {
 	
 	/*
-	 * Desenvolvedor(a): Natália Nuñez
-	 * Criação: 02/07/2019
+	 * Desenvolvedor(a): Junior Sbrissa / Ricardo Cremonez
+	 * Criação: 
 	 * Data da Última Modificação:
 	 * Descritivo da Modificação:
 	 * 
 	 * Descrição:
-	 *  Função Main() para executar os testes com Junit via Jar.
-	 *  Métodos para edição do arquivo de logs
+	 * Função Main() para executar os testes com Junit via Jar.
+	 * Métodos para edição do arquivo de logs
 	 *  
 	 * Variáveis estáticas públicas:
-	 *  arquivolog: arquivo .txt para armazenar status dos steps executados
-	 *  testClass: a classe de teste que está em execução
-	 *  testMethod: o caso de teste que está em execução
+	 * arquivolog: arquivo .txt para armazenar status dos steps executados
+	 * testClass: a classe de teste que está em execução
+	 * testMethod: o caso de teste que está em execução
 	 */
 	
-	public static String arquivoLog;
-	public static String testClass;
-	public static String testMethod;
-	public static String pastaDeRede = "\\\\10.205.73.126\\DirGerTI\\Seguros TI Ctba\\Digital\\Acompanhamento Projetos\\ProjetoAmbienteTestes\\2-DOC.EXEC.PROJ\\FRENTE2-PROCESSO_E_EXECUCAO\\INMETRICS\\Automacao\\PROD\\Android\\";
-	private static TextHelper logFile;
-	private static List<String> logsList = new ArrayList<String>();
+	public  static String fileLog;
+	public  static String folderScenario;
+	public  static String folderExecution;
+	public  static String folderScreenShots;
+	public  static String testClass;
+	public  static String testMethod;
+	public  static String Scenario;
+	private static String dateLog;
+	private static String message;
+	private static String argsHardCoded = "qa.test.web.testDebug.TestDebug#CN001_CT001#Relatorio_Padrao.txt";
 	private static String[] parameters;
-	private static String argsHardCoded = "qa.test.web.testDebug.TestDebug#CN001_CT001#Relatorio_CN001_CT001.txt";
+	private static String[] testClassVet;
+	private static String[] argsIntern;
+	
+	private static int count;
+	
+	private static JUnitCore jUnitCore;
+	private static TextHelper logFile;
+	private static FolderHelper folder;
+	private static BaseExtentReports report;
+	private static Request request;
+	private static Result result;
+	
+	private static Timestamp timeStamp;
+	
+	
+	private static List<String> logsList = new ArrayList<String>();
+	
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+	private static final SimpleDateFormat dateFormatFolder = new SimpleDateFormat("yyyy_MM_dd_HHmmssSS");
+	
 	public static void main(String[] args) throws ClassNotFoundException, IOException, InterruptedException {
 		
+		argsIntern =  args;	
 		//instancia JunitCore responsável por executar/gerenciar a execução dos testes via cmd
-		JUnitCore jUnitCore = new JUnitCore();
+		jUnitCoreInstace();
 		
 		//implementa listener
-		jUnitCore.addListener(new TextListener(System.out));
+		addListener();
 		
-		/*
-		 * se o parâmetro não foi enviado
-		 * popula atributos da classe com valores fixos [debug]
-		 */
-		if(args.length == 0) {
-			parameters = argsHardCoded.split("#");
-		}
-		else
-		{
-			parameters = args[0].split("#");
-		}
+		//se o parâmetro não foi enviado, popula atributos da classe com valores fixos [debug]
+		verifyParameters();
 		
 		//verifica se há os 3 argumentos esperados para início dos testes
 		if(parameters.length ==  3) {
-			
-			/*
-			 * tratamento para o parâmetro enviado via cmd
-			 */			
+					
+			//tratamento para o parâmetro enviado via cmd	
 			testClass = parameters[0];
-			testMethod = parameters[1];
-			arquivoLog = "C:\\Temp\\" + parameters[2].substring(parameters[2].indexOf("Relatorio"));
+			testMethod = parameters[1];	
 			
-			/*
-			 * instancia arquivo .txt de log criado pelo script que executa o projeto
-			 */
+			//inicia estrutura de diretório
+			initStructureFolder();
 			
+			//inicia report do ExtentReport
+			initReport();
+			
+			//Cria diretório de execução
+			createFolder(folderScenario);
+			createFolder(folderExecution);
+			createFolder(folderScreenShots);
+
+			//instancia arquivo .txt de log criado pelo script que executa o projeto
 			initLogFile();
-			addStep("\n[JunitCore] Início dos Testes: " + new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()) +
-					"\n[JunitCore] Total de parâmetros para início dos testes: " + parameters.length +
-					"\n[JunitCore] Classe de teste: " + testClass  +
-					"\n[JunitCore] Método de teste: " + testMethod +
-					"\n[JunitCore] Arquivo de log: " + arquivoLog + "\n");
 			
-			/*
-			 * executa o método de teste dentro da classe de teste indicada
-			 */
-			Request request = Request.method(Class.forName(testClass), testMethod);
-			Result result = jUnitCore.run(request);
+			//executa o método de teste dentro da classe de teste indicada
+			initTest();
 			
-						
-			/*
-			 * Finaliza execução
-			 */
+			//Finaliza execução
 			for(Failure fail: result.getFailures()) {
 				addStep("[Stacktrace]" + fail.getMessage() + "\n" + fail.getTrace());
+				folder.changeIconFolder(folderExecution, "Failed");
 			}
 			
 			if(result.getIgnoreCount() > 0) {
 				addStep("[Step Status: Failed] Caso de Teste " + testMethod + " foi ignorado");
+				folder.changeIconFolder(folderExecution, "Failed");
+			}else {
+				folder.changeIconFolder(folderExecution, "Passed");
 			}
-			
-			/*
-			 * inputa no arquivo .txt de log os passos registrados durante o teste
-			 */
+
+		
+		    //inputa no arquivo .txt de log os passos registrados durante o teste
 			writeSteps();
 			
 			System.exit(result.wasSuccessful() ? 0 : 1);
 		} 	
 	}
+
+	private static void jUnitCoreInstace() throws IOException {
+		jUnitCore = new JUnitCore();
+	}
 	
+	private static void addListener() throws IOException {
+		jUnitCore.addListener(new TextListener(System.out));
+	}
+	
+	private static void verifyParameters() throws IOException {
+		if(argsIntern.length == 0) {
+			parameters = argsHardCoded.split("#");
+			fileLog = "C:\\Temp\\Reports\\" + parameters[2].substring(parameters[2].indexOf("Relatorio"));
+		}
+		else
+		{
+			parameters = argsIntern[0].split("#");
+		}
+	}
 	private static void initLogFile() throws IOException {
-		logFile = new TextHelper(arquivoLog);
+		logFile = new TextHelper(fileLog);
+		
+		addStepInfo(TestRunner.class.toString(), "Início dos Testes");
+		addStepInfo(TestRunner.class.toString(), "Total de parâmetros para início dos testes: " + parameters.length);
+		addStepInfo(TestRunner.class.toString(), "Classe de teste: " + testClass);
+		addStepInfo(TestRunner.class.toString(), "Método de teste: " + testMethod);
+		addStepInfo(TestRunner.class.toString(), "Arquivo de log: " + fileLog);
+	}
+	
+	private static void initStructureFolder() throws IOException {
+		Scenario = testClass.replace(".", "#");
+		
+		testClassVet = Scenario.split("#");
+		count = testClassVet.length;
+		
+		folderScenario = "C:\\Temp\\Reports\\" +testClassVet[count-1];
+		folderExecution = folderScenario+ "\\Run_" +testMethod+ "_" +getTimeStampFolder()+ "_Execution";
+		folderScreenShots = folderExecution+ "\\ScreenShots";		
+	}
+	
+	private static void createFolder(String path) throws IOException {
+		folder = new FolderHelper(path);
+	}
+	
+	private static void initReport() throws IOException {
+		report = new BaseExtentReports(testClass +"_"+ testMethod);
+	}
+	
+	private static void initTest() throws IOException, ClassNotFoundException {
+		request = Request.method(Class.forName(testClass), testMethod);
+		result = jUnitCore.run(request);
+	}
+	
+	private static String getTimeStamp() throws IOException {
+		timeStamp = new Timestamp(System.currentTimeMillis());
+		dateLog = dateFormat.format(timeStamp).toString();
+		
+		return dateLog;
+	}
+	
+	private static String getTimeStampFolder() throws IOException {
+		timeStamp = new Timestamp(System.currentTimeMillis());
+		dateLog = dateFormatFolder.format(timeStamp).toString();
+		
+		return dateLog;
 	}
 	
 	private static void addStep(String stepMessage) throws IOException {
 		System.out.println(stepMessage);
 		logsList.add(stepMessage);
+		BaseExtentReports.logStatusInfo(stepMessage);
 	}
 	
 	public static void addStepPassed(String classMethod, String messageStep) throws IOException {
 		//gerar timestamp para o arquivo de log
-		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-		String dateLog = dateFormat.format(timeStamp).toString();
+		dateLog = getTimeStamp();
 		
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		String message = "[" + dateLog + "][Step Status: Passed][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Step Status: Passed][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
+		
+		message = "[" + classMethod + "] " + messageStep;
+		BaseExtentReports.logStatusPassed(message);
 	}
 	
 	public static void addStepFailed(String classMethod, String messageStep) throws IOException {
 		//gerar timestamp para o arquivo de log
-		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-		String dateLog = dateFormat.format(timeStamp).toString();
+		dateLog = getTimeStamp();
 		
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		String message = "[" + dateLog + "][Step Status: Failed][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Step Status: Failed][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
+		
+		message = "[" + classMethod + "] " + messageStep;
+		BaseExtentReports.logStatusFailed(message);
 	}
 	
 	public static void addStepWarning(String classMethod, String messageStep) throws IOException {
 		//gerar timestamp para o arquivo de log
-		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-		String dateLog = dateFormat.format(timeStamp).toString();
+		dateLog = getTimeStamp();
 		
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		String message = "[" + dateLog + "][Step Status: Warning][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Step Status: Warning][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
+		
+		message = "[" + classMethod + "] " + messageStep;
+		BaseExtentReports.logStatusWarning(message);
 	}
 	
 	public static void addStepInfo(String classMethod, String messageStep) throws IOException {
 		//gerar timestamp para o arquivo de log
-		Timestamp timeStamp = new Timestamp(System.currentTimeMillis());
-		String dateLog = dateFormat.format(timeStamp).toString();
+		dateLog = getTimeStamp();
 		
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		String message = "[" + dateLog + "][Step Info][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Step Info][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
+		
+		message = "[" + classMethod + "] " + messageStep;
+		BaseExtentReports.logStatusInfo(message);
 	}
 	
 	private static void writeSteps() throws IOException {

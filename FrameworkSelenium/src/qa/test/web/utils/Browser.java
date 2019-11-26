@@ -19,7 +19,7 @@ import qa.test.web.basePage.TestRunner;
 
 public class Browser {
 		
-	WebDriver driver;
+	static WebDriver driver;
 	WebDriverWait wait;
 	ArrayList<String> tabs;
 	
@@ -65,15 +65,15 @@ public class Browser {
         wait = new WebDriverWait(driver, 30);
         JavascriptExecutor js = (JavascriptExecutor)driver;
         try {
-        	TestRunner.addStepPassed(BasePage.getClassMethod(this), "Aguardando carregar página (até 30 segundos)");
+        	TestRunner.addStepInfo(BasePage.getClassMethod(this), "Aguardando carregar página (até 30 segundos)");
         	if (wait.until(pageLoadCondition)) {
         		String status = (String)js.executeScript("return document.readyState");
         		status = "Status da página: " + status;
-        		TestRunner.addStepPassed(BasePage.getClassMethod(this), status);
+        		TestRunner.addStepInfo(BasePage.getClassMethod(this), status);
 			} else {
 				String status = (String)js.executeScript("return document.readyState");
 				status = "Status da página: " + status;
-				TestRunner.addStepPassed(BasePage.getClassMethod(this), status);
+				TestRunner.addStepInfo(BasePage.getClassMethod(this), status);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -87,10 +87,10 @@ public class Browser {
 				case "CHROME":
 					System.setProperty("webdriver.chrome.driver", "drivers\\chrome\\chromedriver.exe");
 					ChromeOptions optionChrome = new ChromeOptions();
-					optionChrome.setPageLoadStrategy(pageLoadStrategy);
+					//optionChrome.setPageLoadStrategy(pageLoadStrategy);
 					driver = new ChromeDriver(optionChrome);
 					driver.manage().window().maximize();
-					TestRunner.addStepPassed(BasePage.getClassMethod(this), "Navegador " + navegador.toLowerCase() + " iniciado com sucesso");
+					TestRunner.addStepInfo(BasePage.getClassMethod(this), "Navegador " + navegador.toLowerCase() + " iniciado com sucesso");
 					break;
 				case "FIREFOX":
 					System.setProperty("webdriver.gecko.driver", "drivers\\firefox\\geckodriver.exe");
@@ -98,7 +98,7 @@ public class Browser {
 					optionFirefox.setPageLoadStrategy(pageLoadStrategy);
 					driver = new FirefoxDriver(optionFirefox);
 					driver.manage().window().maximize();
-					TestRunner.addStepPassed(BasePage.getClassMethod(this), "Navegador " + navegador.toLowerCase() + " iniciado com sucesso");
+					TestRunner.addStepInfo(BasePage.getClassMethod(this), "Navegador " + navegador.toLowerCase() + " iniciado com sucesso");
 					break;
 				default:
 					TestRunner.addStepFailed(BasePage.getClassMethod(this), "Não foi possível iniciar o navegador " + navegador.toLowerCase());
@@ -114,7 +114,7 @@ public class Browser {
 		try {
 			driver.close();
 			driver.quit();
-			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Navegador encerrado com sucesso");
+			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Navegador encerrado com sucesso");
 		} catch (Exception e) {
 			TestRunner.addStepWarning(BasePage.getClassMethod(this), "Não foi possível encerrar o navegador");
 			try {
@@ -132,7 +132,7 @@ public class Browser {
 		try {
 			driver.close();
 			driver.quit();
-			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Navegador encerrado com sucesso");
+			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Navegador encerrado com sucesso");
 		} catch (Exception e) {
 			TestRunner.addStepWarning(BasePage.getClassMethod(this), "Não foi possível encerrar o navegador");
 			if (stopAtError) {
