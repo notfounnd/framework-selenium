@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="C:/Git/framework-selenium/FrameworkSelenium/dependency/json-simple-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Git/framework-selenium/FrameworkSelenium/dependency/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="C:/Git/framework-selenium/FrameworkSelenium/extentreports/extentreports-2.41.2.jar"/>
+	<classpathentry kind="lib" path="C:/Git/framework-selenium/FrameworkSelenium/extentreports/freemarker-2.3.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
