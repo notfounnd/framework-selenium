@@ -50,7 +50,7 @@ public class FolderHelper {
 
 	}
 	
-	public void changeIconFolder(String path, String status) throws IOException {	
+	public void changeIconFolder(String path, String status) throws IOException, InterruptedException {	
 		
 		this.path = path;
 
@@ -66,9 +66,11 @@ public class FolderHelper {
 			ProcessBuilder cmd = new ProcessBuilder("cmd", "/c", "_pass.bat");
 			File dir = new File(path);
 			cmd.directory(dir);
+			Thread.sleep(1000);
 			Process exec = cmd.start();
 			
-			//deleta .bat copiado
+			//Deleta .bat copiado
+			Thread.sleep(1000);
 			dest.delete();
 			
 		} else {
@@ -83,9 +85,11 @@ public class FolderHelper {
 			ProcessBuilder cmd = new ProcessBuilder("cmd", "/c", "_fail.bat");
 			File dir = new File(path);
 			cmd.directory(dir);
+			Thread.sleep(1000);
 			Process exec = cmd.start();
 			
-			//deleta .bat copiado
+			//Deleta .bat copiado
+			Thread.sleep(1000);
 			dest.delete();
 		}
 	}

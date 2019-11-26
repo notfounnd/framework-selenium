@@ -50,7 +50,6 @@ public class TestDebug {
 	@After
 	public void tearDown() throws IOException, ParserConfigurationException, SAXException {
 		
-		BaseExtentReports.endTest();
 		navigator.closeBrowser();
 		
 	}

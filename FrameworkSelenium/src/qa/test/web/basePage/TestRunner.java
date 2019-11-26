@@ -97,18 +97,21 @@ public class TestRunner {
 			
 			//Finaliza execução
 			for(Failure fail: result.getFailures()) {
-				addStep("[Stacktrace]" + fail.getMessage() + "\n" + fail.getTrace());
-				folder.changeIconFolder(folderExecution, "Failed");
+				Scenario = folderScenario;
+				//addStep("[Stacktrace]" + fail.getMessage() + "\n" + fail.getTrace());
+				addStepFailed(testClass, "[Stacktrace Error Execution]" + fail.getMessage() + "\n" + fail.getTrace());
 			}
 			
-			if(result.getIgnoreCount() > 0) {
-				addStep("[Step Status: Failed] Caso de Teste " + testMethod + " foi ignorado");
+			//Altera icone da pasta
+			if(result.getFailureCount() > 0) {
 				folder.changeIconFolder(folderExecution, "Failed");
 			}else {
 				folder.changeIconFolder(folderExecution, "Passed");
 			}
-
-		
+			
+			//Finaliza report
+			endReport();
+			
 		    //inputa no arquivo .txt de log os passos registrados durante o teste
 			writeSteps();
 			
@@ -163,6 +166,10 @@ public class TestRunner {
 		report = new BaseExtentReports(testClass +"_"+ testMethod);
 	}
 	
+	private static void endReport() throws IOException {
+		BaseExtentReports.endTest();
+	}
+	
 	private static void initTest() throws IOException, ClassNotFoundException {
 		request = Request.method(Class.forName(testClass), testMethod);
 		result = jUnitCore.run(request);
@@ -195,7 +202,7 @@ public class TestRunner {
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		message = "[" + dateLog + "][Step Status: Passed][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Passed][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
 		
@@ -210,7 +217,7 @@ public class TestRunner {
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		message = "[" + dateLog + "][Step Status: Failed][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Failed][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
 		
@@ -225,7 +232,7 @@ public class TestRunner {
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		message = "[" + dateLog + "][Step Status: Warning][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Warning][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
 		
@@ -240,7 +247,7 @@ public class TestRunner {
 		//corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
-		message = "[" + dateLog + "][Step Info][" + classMethod + "] " + messageStep;
+		message = "[" + dateLog + "][Info][" + classMethod + "] " + messageStep;
 		System.out.println(message);
 		logsList.add(message);
 		

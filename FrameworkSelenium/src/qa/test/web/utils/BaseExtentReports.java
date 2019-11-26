@@ -51,8 +51,12 @@ public class BaseExtentReports {
 	
 	public static void logStatusFailed(String messageStep) {
 		try {
-			String screenShotPath = ScreenShot.capture();
-			test.log(LogStatus.FAIL, messageStep+test.addScreenCapture(screenShotPath));
+			if (messageStep.contains("[Stacktrace Error Execution]")) {
+				test.log(LogStatus.FAIL, messageStep);
+			} else {
+				String screenShotPath = ScreenShot.capture();
+				test.log(LogStatus.FAIL, messageStep+test.addScreenCapture(screenShotPath));
+			}
 			report.flush();
 		} catch (Exception e) {
 			e.printStackTrace();

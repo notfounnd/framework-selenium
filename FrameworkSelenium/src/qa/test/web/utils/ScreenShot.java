@@ -12,7 +12,6 @@ import org.openqa.selenium.WebDriver;
 
 import qa.test.web.basePage.TestRunner;
 
-@SuppressWarnings({"unused"})
 public class ScreenShot {
 	
 	private static String dateLog;
