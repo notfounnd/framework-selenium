@@ -21,7 +21,7 @@ import qa.test.web.basePage.TestRunner;
 import qa.test.web.utils.BaseExtentReports;
 import qa.test.web.utils.Browser;
 
-@SuppressWarnings({"unused"})
+//@SuppressWarnings({"unused"})
 
 public class TestDebug {
 	
