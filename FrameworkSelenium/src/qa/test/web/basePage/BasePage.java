@@ -18,8 +18,7 @@ import qa.test.web.basePage.TestRunner;
 public class BasePage {
 	
 	/*
-	 * Data da Última Modificação: 05/11/2019
-	 * Descritivo da Modificação: Merge efetuado entre códigos: Ricardo e Natália. Editado por: Júnior Sbrissa e Ricardo Cremonez.
+	 * Dev: Junior Sbrissa
 	 */
 	
 	protected WebDriver driver;
@@ -36,7 +35,6 @@ public class BasePage {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(element));			
 		} catch (TimeoutException e) {
-			//TestRunner.addStep("[Step Status: Failed][Elemento não está visível] Elemento não pode ser localizado pela referência " + getLocator(element));
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Elemento não pode ser localizado pela referência " + getLocator(element));
 			Assert.fail();
 		}
@@ -47,7 +45,6 @@ public class BasePage {
 			wait.until(ExpectedConditions.visibilityOf(element));
 			return true;
 		} catch (Exception e) {
-			//TestRunner.addStep("[Step Status: Warning][Elemento não existe] Causa: Tempo de espera alcançado " + getLocator(element));
 			TestRunner.addStepWarning(BasePage.getClassMethod(this), "Timeout ao tentar encontrar o elemento" + getLocator(element));
 			return false;
 		}
@@ -57,7 +54,6 @@ public class BasePage {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 		} catch (Exception e) {
-			//TestRunner.addStep("[Step Status: Failed][Elemento não é clicável] Elemento não é clicável " + getLocator(element) + ". Causa: " + e.getMessage());
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Não foi possível clicar no element " + getLocator(element) + ". Causa: " + e.getMessage());
 			Assert.fail();
 		}
@@ -68,7 +64,6 @@ public class BasePage {
 		waitToBeClickable(element);
 		element.click();
 		element.sendKeys(text);
-		//TestRunner.addStep("[Step Status: Passed][SendKeys] Texto '" + text + "' enviado ao elemento com a referência " + getLocator(element));
 		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Texto '" + text + "' enviado ao elemento com a referência " + getLocator(element));
 		}
 	
@@ -76,7 +71,6 @@ public class BasePage {
 
 		waitVisibility(element);
 		String valor = element.getText();
-		//TestRunner.addStep("[Step Status: Passed][GetValue] Valor '" + valor + "' encontrado " + getLocator(element));
 		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Valor '" + valor + "' encontrado " + getLocator(element));
 		return valor;
 		}
@@ -84,7 +78,6 @@ public class BasePage {
 	public void click(WebElement element) throws IOException {
 		waitToBeClickable(element);
 		element.click();
-		//TestRunner.addStep("[Step Status: Passed][Click] Elemento com a referência " + getLocator(element));
 		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Click realizado no elemento com a referência " + getLocator(element));
 	}
 
@@ -95,14 +88,8 @@ public class BasePage {
 		action.click();
 		action.build();
 		action.perform();
-		//TestRunner.addStep("[Step Status: Passed][Click por Coordenada] Elemento com a referência " + getLocator(element)	+ " referente a coordenada x:" + x + " e coordenada y:" + y);
 		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Click por coordenada realizado no elemento com a referência " + getLocator(element) + " (x: " + x + ", y: " + y + ")");
 	}
-	
-//	public void setContextToWebView() throws IOException {
-//		((AndroidDriver) device).context("WEBVIEW_br.com.bradseg.bscelular");
-//		TestRunner.addStep("[Step Status: Passed] Contexto modificado com sucesso para 'WEBVIEW_br'");
-//	}
 	
 	/** 
 	 * 
@@ -184,12 +171,10 @@ public class BasePage {
 		
 		try {
 			element.sendKeys(key);
-			//TestRunner.addStep("[Step Status: Passed] Tecla [" + key.toString() + "] pressionada");
 			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Tecla '" + key.toString() + "' pressionada");
-			//Comentario do mau pra não esquecer como usa
-			//keyBoardEvent(Keys.ADD, driver.findElement(By.tagName("body")) );
+			//Exemplo de uso
+			//keyBoardEvent(Keys.LEFT_CONTROL, driver.findElement(By.tagName("body")) );
 		} catch (Exception e) {
-			//TestRunner.addStep("[Step Status: Failed] Não foi possível pressionar a tecla [" + key.toString() + "]");
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Não foi possível pressionar a tecla '" + key.toString() + "'");
 			Assert.fail();
 		}

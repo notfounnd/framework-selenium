@@ -59,7 +59,7 @@ public class FolderHelper {
 			File source = new File(System.getProperty("user.dir") +"\\resources\\_pass.bat");
 			File dest = new File(path+"\\_pass.bat");
 			
-			//copia arquivo para a pasta de execução(path)
+			//Copia arquivo para a pasta de execução(path)
 			FileHelper.copyPasteFile(source, dest);
 			
 			//Executa .bat para alterar ícone da pasta
@@ -78,7 +78,7 @@ public class FolderHelper {
 			File source = new File(System.getProperty("user.dir") +"\\resources\\_fail.bat");
 			File dest = new File(path+"\\_fail.bat");
 			
-			//copia arquivo para a pasta de execução(path)
+			//Copia arquivo para a pasta de execução(path)
 			FileHelper.copyPasteFile(source, dest);
 			
 			//Executa .bat para alterar ícone da pasta

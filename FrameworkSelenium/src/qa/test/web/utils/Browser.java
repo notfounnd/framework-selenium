@@ -27,10 +27,6 @@ public class Browser {
 		//PageFactory.initElements(driver, this);
 	}
 	
-	//Elementos PageFactory
-	//@FindBy(id="username")
-	//WebElement ABC;
-	
 	/*
 	 * Abrir navegador
 	 * 
@@ -48,12 +44,6 @@ public class Browser {
 	 *	var.browser("CHROME", PageLoadStrategy.NORMAL);
 	 * 
 	 */
-	
-//	private void waitPageLoad() {
-//		wait = new WebDriverWait(driver, 50);
-//		wait.until(ExpectedConditions.jsReturnsValue("return document.readyState==\"complete\";"));
-//		TestRunner.addStep(ExpectedConditions.jsReturnsValue("return document.readyState==\"complete\";"));
-//	}
 	
 	private void waitPageLoad() throws IOException {
 		
@@ -87,7 +77,6 @@ public class Browser {
 				case "CHROME":
 					System.setProperty("webdriver.chrome.driver", "drivers\\chrome\\chromedriver.exe");
 					ChromeOptions optionChrome = new ChromeOptions();
-					//optionChrome.setPageLoadStrategy(pageLoadStrategy);
 					driver = new ChromeDriver(optionChrome);
 					driver.manage().window().maximize();
 					TestRunner.addStepInfo(BasePage.getClassMethod(this), "Navegador " + navegador.toLowerCase() + " iniciado com sucesso");
@@ -126,7 +115,7 @@ public class Browser {
 	}
 	
 	/*
-	 * Overload do método 'closeBrowser' para não para a execução
+	 * Override do método 'closeBrowser' para não para a execução
 	 */
 	public void closeBrowser(boolean stopAtError) throws IOException {
 		try {

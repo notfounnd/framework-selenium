@@ -76,7 +76,7 @@ public class JsonHelper {
 
 		try {
 			// Salva no objeto JSONObject o que o parse tratou do arquivo
-			//jsonObject = (JSONObject) parser.parse(new FileReader(System.getProperty("user.dir") + "\\qa.test.web.testData\\" + fileName + ".json"));
+			// jsonObject = (JSONObject) parser.parse(new FileReader(System.getProperty("user.dir") + "\\qa.test.web.testData\\" + fileName + ".json"));
 			jsonObject = (JSONObject) parser.parse(readerFile);
 			
 			jsonObject.put(key, value);

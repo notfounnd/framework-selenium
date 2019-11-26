@@ -14,14 +14,11 @@ public class BaseExtentReports {
 	static ExtentReports report;
 	
 	public BaseExtentReports(String testSuite) {
-		// TODO Auto-generated method stub
 		startTest(testSuite);
 	}
 	
 	public void startTest(String testSuite) {
 		try {
-//			report = new ExtentReports(System.getProperty("user.dir") + "\\report\\" + testSuite + ".html", true);
-//			report.loadConfig(new File(System.getProperty("user.dir") + "\\report\\config.xml"));
 			report = new ExtentReports(TestRunner.folderExecution+ "\\" +testSuite+ ".html", true);
 			report.loadConfig(new File("C:\\Temp\\Reports\\config.xml"));
 			test = report.startTest(testSuite);

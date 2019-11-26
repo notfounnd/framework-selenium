@@ -38,13 +38,11 @@ public class TextHelper {
 	
 	private Boolean fileExist() throws IOException {
 		if(file.exists()) {
-			//TestRunner.addStep("[Text Helper] Arquivo existe: " + path.substring(path.indexOf("Relatorio")));
 			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Arquivo existe: " + path.substring(path.indexOf("Relatorio")));
 			fileExist = true;
 		}
 		else 
 		{
-			//TestRunner.addStep("[Text Helper] Arquivo não existe: " + path.substring(path.indexOf("Relatorio")));
 			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Arquivo não existe: " + path.substring(path.indexOf("Relatorio")));
 			fileExist = false;
 		}
@@ -53,13 +51,11 @@ public class TextHelper {
 	
 	private TextHelper canWriteOnFile() throws IOException {
 		if(file.canWrite()) {
-			//TestRunner.addStep("[Text Helper] Arquivo disponível para escrita: " + path.substring(path.indexOf("Relatorio")));
 			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Arquivo disponível para escrita: " + path.substring(path.indexOf("Relatorio")));
 			fileCanWrite = true;
 		}
 		else
 		{
-			//TestRunner.addStep("[Text Helper] Arquivo indisponível para escrita: " + path.substring(path.indexOf("Relatorio")));
 			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Arquivo indisponível para escrita: " + path.substring(path.indexOf("Relatorio")));
 			fileCanWrite = false;
 		}

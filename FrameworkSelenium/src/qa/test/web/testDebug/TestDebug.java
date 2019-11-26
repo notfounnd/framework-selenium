@@ -6,17 +6,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.xml.sax.SAXException;
 
-import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
-import qa.test.web.basePage.BasePage;
 import qa.test.web.basePage.TestRunner;
 import qa.test.web.utils.BaseExtentReports;
 import qa.test.web.utils.Browser;

@@ -62,26 +62,26 @@ public class TestRunner {
 	public static void main(String[] args) throws ClassNotFoundException, IOException, InterruptedException {
 		
 		argsIntern =  args;	
-		//instancia JunitCore responsável por executar/gerenciar a execução dos testes via cmd
+		//Instancia JunitCore responsável por executar/gerenciar a execução dos testes via cmd
 		jUnitCoreInstace();
 		
-		//implementa listener
+		//Implementa listener
 		addListener();
 		
-		//se o parâmetro não foi enviado, popula atributos da classe com valores fixos [debug]
+		//Se o parâmetro não foi enviado, popula atributos da classe com valores fixos [debug]
 		verifyParameters();
 		
-		//verifica se há os 3 argumentos esperados para início dos testes
+		//Verifica se há os 3 argumentos esperados para início dos testes
 		if(parameters.length ==  3) {
 					
-			//tratamento para o parâmetro enviado via cmd	
+			//Tratamento para o parâmetro enviado via cmd	
 			testClass = parameters[0];
 			testMethod = parameters[1];	
 			
-			//inicia estrutura de diretório
+			//Inicia estrutura de diretório
 			initStructureFolder();
 			
-			//inicia report do ExtentReport
+			//Inicia report do ExtentReport
 			initReport();
 			
 			//Cria diretório de execução
@@ -89,10 +89,10 @@ public class TestRunner {
 			createFolder(folderExecution);
 			createFolder(folderScreenShots);
 
-			//instancia arquivo .txt de log criado pelo script que executa o projeto
+			//Instancia arquivo .txt de log criado pelo script que executa o projeto
 			initLogFile();
 			
-			//executa o método de teste dentro da classe de teste indicada
+			//Executa o método de teste dentro da classe de teste indicada
 			initTest();
 			
 			//Finaliza execução
@@ -112,7 +112,7 @@ public class TestRunner {
 			//Finaliza report
 			endReport();
 			
-		    //inputa no arquivo .txt de log os passos registrados durante o teste
+		    //Iputa no arquivo .txt de log os passos registrados durante o teste
 			writeSteps();
 			
 			System.exit(result.wasSuccessful() ? 0 : 1);
@@ -196,10 +196,10 @@ public class TestRunner {
 	}
 	
 	public static void addStepPassed(String classMethod, String messageStep) throws IOException {
-		//gerar timestamp para o arquivo de log
+		//Gerar timestamp para o arquivo de log
 		dateLog = getTimeStamp();
 		
-		//corrigir string classMethod
+		//Corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
 		message = "[" + dateLog + "][Passed][" + classMethod + "] " + messageStep;
@@ -211,10 +211,10 @@ public class TestRunner {
 	}
 	
 	public static void addStepFailed(String classMethod, String messageStep) throws IOException {
-		//gerar timestamp para o arquivo de log
+		//Gerar timestamp para o arquivo de log
 		dateLog = getTimeStamp();
 		
-		//corrigir string classMethod
+		//Corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
 		message = "[" + dateLog + "][Failed][" + classMethod + "] " + messageStep;
@@ -226,10 +226,10 @@ public class TestRunner {
 	}
 	
 	public static void addStepWarning(String classMethod, String messageStep) throws IOException {
-		//gerar timestamp para o arquivo de log
+		//Gerar timestamp para o arquivo de log
 		dateLog = getTimeStamp();
 		
-		//corrigir string classMethod
+		//Corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
 		message = "[" + dateLog + "][Warning][" + classMethod + "] " + messageStep;
@@ -241,10 +241,10 @@ public class TestRunner {
 	}
 	
 	public static void addStepInfo(String classMethod, String messageStep) throws IOException {
-		//gerar timestamp para o arquivo de log
+		//Gerar timestamp para o arquivo de log
 		dateLog = getTimeStamp();
 		
-		//corrigir string classMethod
+		//Corrigir string classMethod
 		classMethod = classMethod.replace("class ", "");
 		
 		message = "[" + dateLog + "][Info][" + classMethod + "] " + messageStep;

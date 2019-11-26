@@ -35,7 +35,7 @@ public class ScreenShot {
     	ts = (TakesScreenshot)driver;
         source = ts.getScreenshotAs(OutputType.FILE);
         
-        //gerar timestamp para o arquivo de log
+        //Gerar timestamp para o arquivo de log
   		dateLog = getTimeStamp();
   		
   		//Trata Nome ScreenShot
