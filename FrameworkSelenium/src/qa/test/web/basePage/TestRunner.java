@@ -25,19 +25,7 @@ import qa.test.web.utils.TextHelper;
 public class TestRunner {
 	
 	/*
-	 * Desenvolvedor(a): Junior Sbrissa / Ricardo Cremonez
-	 * Criação: 
-	 * Data da Última Modificação:
-	 * Descritivo da Modificação:
-	 * 
-	 * Descrição:
-	 * Função Main() para executar os testes com Junit via Jar.
-	 * Métodos para edição do arquivo de logs
-	 *  
-	 * Variáveis estáticas públicas:
-	 * arquivolog: arquivo .txt para armazenar status dos steps executados
-	 * testClass: a classe de teste que está em execução
-	 * testMethod: o caso de teste que está em execução
+	 * Dev: Junior Sbrissa
 	 */
 	
 	public  static String fileLog;

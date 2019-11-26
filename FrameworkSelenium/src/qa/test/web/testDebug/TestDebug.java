@@ -21,60 +21,43 @@ import qa.test.web.basePage.TestRunner;
 import qa.test.web.utils.BaseExtentReports;
 import qa.test.web.utils.Browser;
 
-//@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused"})
 
 public class TestDebug {
 	
 	Browser navigator;
-	//static ExtentReports report;
+	private WebDriver driver;
 	static BaseExtentReports reports;
 	static ExtentTest test;
 	String testClass = TestRunner.testClass;
 	String testMethod = TestRunner.testMethod;
-	//BaseExtentReports report = new BaseExtentReports(testClass +"_"+ testMethod);
-	private WebDriver driver;
 	
-//	@BeforeClass
-//	public void startTestReport() {
-//		report = new ExtentReports(System.getProperty("user.dir") + "\\ExtentReportResults.html");
-//		test = report.startTest("ExtentDemo");
-//		try {
-//			report.startTest(TestDebug.getClassMethod(this));
-//		} catch (Throwable e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
-	
+	/*
+	 * Pré-teste
+	 */
 	@Before
 	public void setUp() throws Throwable {
 				
 		//report.startTest("TestReport");
 		navigator = new Browser();
 		navigator.openBrowser("CHROME", PageLoadStrategy.NORMAL);
-	
+		
 	}
 	
+	/*
+	 * Pós-teste
+	 */
 	@After
 	public void tearDown() throws IOException, ParserConfigurationException, SAXException {
 		
 		BaseExtentReports.endTest();
 		navigator.closeBrowser();
 		
-
 	}
 	
 	/*
-	*===================================================================================================================================================================
-	*Caso de Teste: CT001 - Acessar aplicativo BSC com cliente que possui produto Saúde
-	*Função: Acessar aplicativo BSC com cliente que possui produto Saúde
-	*Desenvolvedora: Ricardo Cremonez
-	*Data: 03/09/2019
-	*Revisão: 
-	*Data: 
-	*===================================================================================================================================================================
-	*/
+	 * Teste
+	 */
 	@Test
 	public void CN001_CT001() throws Exception {
 		
