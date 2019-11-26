@@ -12,5 +12,7 @@
 	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/selenium/libs/okhttp-3.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/framework-selenium/FrameworkSelenium/selenium/libs/okio-1.14.0.jar"/>
 	<classpathentry kind="lib" path="C:/Git/framework-selenium/FrameworkSelenium/dependency/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Git/framework-selenium/FrameworkSelenium/dependency/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Git/framework-selenium/FrameworkSelenium/extentreports/extentreports-2.41.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
