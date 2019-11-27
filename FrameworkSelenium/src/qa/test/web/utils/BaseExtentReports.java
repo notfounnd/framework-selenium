@@ -46,6 +46,15 @@ public class BaseExtentReports {
 		}
 	}
 	
+	public static void logStatusPassedNoPrint(String messageStep) {
+		try {
+			test.log(LogStatus.PASS, messageStep);
+			report.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void logStatusFailed(String messageStep) {
 		try {
 			if (messageStep.contains("[Stacktrace Error Execution]")) {

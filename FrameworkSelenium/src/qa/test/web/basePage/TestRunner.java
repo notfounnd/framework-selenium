@@ -210,6 +210,21 @@ public class TestRunner {
 		BaseExtentReports.logStatusPassed(message);
 	}
 	
+	public static void addStepPassedNoPrint(String classMethod, String messageStep) throws IOException {
+		//Gerar timestamp para o arquivo de log
+		dateLog = getTimeStamp();
+		
+		//Corrigir string classMethod
+		classMethod = classMethod.replace("class ", "");
+		
+		message = "[" + dateLog + "][Passed][" + classMethod + "] " + messageStep;
+		System.out.println(message);
+		logsList.add(message);
+		
+		message = "[" + classMethod + "] " + messageStep;
+		BaseExtentReports.logStatusPassedNoPrint(message);
+	}
+	
 	public static void addStepFailed(String classMethod, String messageStep) throws IOException {
 		//Gerar timestamp para o arquivo de log
 		dateLog = getTimeStamp();
