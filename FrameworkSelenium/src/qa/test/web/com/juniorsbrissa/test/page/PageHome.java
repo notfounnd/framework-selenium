@@ -3,6 +3,7 @@ package qa.test.web.com.juniorsbrissa.test.page;
 import java.io.IOException;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -102,43 +103,18 @@ public class PageHome extends BasePage {
 	 * Metodos
 	 */
 	
-	public void insertValueRSVP(String codigoRSVP) throws IOException {
+	private void validateStartFormRSVP() throws IOException {
 		
-		//Verificar se o campo 'rsvpInputCodigoRSVP' existe na tela
+		//Verificar área RSVP em estágio inicial
 		if (elementExist(rsvpInputCodigoRSVP)) {
-			
-			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Campo 'Código RSVP' encontrado com sucesso");
-			
-			try {
-				//Preencher campo 'rsvpInputCodigoRSVP'
-				sendkeys(rsvpInputCodigoRSVP, codigoRSVP);
-			} catch (Exception e) {
-				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao inserir informação 'Código RSVP'");
-				Assert.fail();
-			}
-			
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Campo 'Código RSVP' encontrado com sucesso");
 		} else {
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Campo 'Código RSVP' não encontrado");
 			Assert.fail();
 		}
 		
-	}
-	
-	public void clickButtonVerificarCodigo() throws IOException {
-		
-		// Verificar botão 'rsvpButtonVerificarCodigo' existe
 		if (elementExist(rsvpButtonVerificarCodigo)) {
-			
-			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Botão 'Verificar Código' encontrado com sucesso");
-			
-			try {
-				//Preencher campo 'rsvpInputCodigoRSVP'
-				click(rsvpInputCodigoRSVP);
-			} catch (Exception e) {
-				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao clicar no botão 'Verificar Código'");
-				Assert.fail();
-			}
-			
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Botão 'Verificar Código' encontrado com sucesso");
 		} else {
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Botão 'Verificar Código' não encontrado");
 			Assert.fail();
@@ -146,12 +122,40 @@ public class PageHome extends BasePage {
 		
 	}
 	
+	public void insertValueRSVP(String codigoRSVP) throws IOException {
+		
+		validateStartFormRSVP();
+		
+		//Preencher campo 'rsvpInputCodigoRSVP'
+		try {
+			sendkeys(rsvpInputCodigoRSVP, codigoRSVP);
+			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Campo 'Código RSVP' encontrado com sucesso");
+		} catch (Exception e) {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao inserir informação 'Código RSVP'");
+			Assert.fail();
+		}
+		
+	}
+	
+	public void clickButtonVerificarCodigoRSVP() throws IOException {
+		
+		//Clicar no botão 'Verificar Código'
+		try {
+			click(rsvpInputCodigoRSVP);
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Botão 'Verificar Código' acionado com sucesso");
+		} catch (Exception e) {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao clicar no botão 'Verificar Código'");
+			Assert.fail();
+		}
+		
+	}
+	
 	public void validadeFieldNameRSVP(String name) throws IOException {
 		
+		//Verificar informação 'Nome' da massa de teste
 		if (elementExist(rsvpFieldName)) {
 			
 			String valueFieldName = rsvpFieldName.getText();
-			
 			if (valueFieldName == name) {
 				TestRunner.addStepPassed(BasePage.getClassMethod(this), "Campo 'Nome' encontrado com valor " + valueFieldName);
 			} else {
@@ -161,6 +165,100 @@ public class PageHome extends BasePage {
 			
 		} else {
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Campo 'Nome' não encontrado");
+			Assert.fail();
+		}
+		
+	}
+	
+	private void validateFormAnswerRSVP() throws IOException {
+		
+		//Verificar opções de resposta
+		if (elementExist(rsvpInputRadioSim) && elementExist(rsvpInputRadioNao) && elementExist(rsvpButtonEnviar)) {
+			
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Opção de resposta 'Sim' encontrada com sucesso");
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Opção de resposta 'Não' encontrada com sucesso");
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Botão 'Enviar' encontrado com sucesso");
+			
+		} else {
+			
+			if (!elementExist(rsvpInputRadioSim)) {
+				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Opção 'Sim' não foi encontrado");
+			}
+			
+			if (!elementExist(rsvpInputRadioNao)) {
+				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Opção 'Não' não foi encontrado");
+			}
+			
+			if (!elementExist(rsvpButtonEnviar)) {
+				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Botão 'Enviar' não foi encontrado");
+			}
+			
+			Assert.fail();
+		}
+
+	}
+	
+	public void setAnswerRSVP(String answer) throws IOException {
+		
+		//Validar formulário de resposta RSVP
+		validateFormAnswerRSVP();
+		
+		//Enviar resposta
+		try {
+			if (answer.equalsIgnoreCase("sim")) {
+				rsvpInputRadioSim.click();
+				TestRunner.addStepPassed(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' selecionada com sucesso");
+				rsvpButtonEnviar.click();
+				TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' enviada com sucesso");
+			} else {
+				rsvpInputRadioNao.click();
+				TestRunner.addStepPassed(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' selecionada com sucesso");
+				rsvpButtonEnviar.click();
+				TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' enviada com sucesso");
+			}
+		} catch (Exception e) {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao clicar no botão 'Enviar'");
+			Assert.fail();
+		}
+
+	}
+	
+	public void validateSendAnswerRSVP(String name) throws IOException {
+		
+		//Sobreescrever elemento 'rsvpFieldMessageConfirmationRSVP'
+		rsvpFieldMessageConfirmationRSVP = driver.findElement(By.xpath("//div[@id='rsvpPlugin']//p[@class='rsvpParagraph' and contains(text(),'Obrigado " + name + "')]"));
+		
+		//Verificar RSVP concluído
+		if (elementExist(rsvpFieldMessageConfirmationRSVP)) {
+			TestRunner.addStepPassed(BasePage.getClassMethod(this), "RSVP efetuado com sucesso para a pessoa '" + name + "'");
+		} else {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Não foi possível validar a conclusão do RSVP para a pessoa '" + name + "'");
+			Assert.fail();
+		}
+		
+	}
+	
+	private void validateReloadFormRSVP() throws IOException {
+		
+		if (elementExist(rsvpFieldRelaoadFormRSVP)) {
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Link para reiniciar o formulário RSVP localizado com sucesso");
+		} else {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Não foi possível localizar o link para reiniciar o formulário RSVP");
+			Assert.fail();
+		}
+		
+	}
+	
+	public void reloadFormRSVP() throws IOException {
+		
+		validateReloadFormRSVP();
+		
+		try {
+			rsvpFieldRelaoadFormRSVP.click();
+			validateStartFormRSVP();
+			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Formulário RSVP reiniciado com sucesso");
+		} catch (Exception e) {
+			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao reiniciar o formulário RSVP");
 			Assert.fail();
 		}
 		
