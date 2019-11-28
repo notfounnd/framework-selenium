@@ -16,7 +16,6 @@ public class PageHome extends BasePage {
 
 	public PageHome(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 		PageFactory.initElements(driver, this);
 	}
 	
@@ -59,6 +58,12 @@ public class PageHome extends BasePage {
 	 * Página: Home
 	 * Área: RSVP
 	 */
+	@FindBy(xpath = "//div/h2[contains(text(),'Confirmar')]")
+	WebElement rsvpHeaderArea;
+	
+	@FindBy(xpath = "//div/a[@id='rsvpArea']")
+	WebElement rsvpArea;
+	
 	@FindBy(xpath = "//div[@id='rsvpPlugin']//input[@id='firstName']")
 	WebElement rsvpInputCodigoRSVP;
 	
@@ -122,13 +127,12 @@ public class PageHome extends BasePage {
 		
 	}
 	
-	public void insertValueRSVP(String codigoRSVP) throws IOException {
-		
-		validateStartFormRSVP();
+	public void insertValueRSVP(String codeRSVP) throws IOException {
 		
 		//Preencher campo 'rsvpInputCodigoRSVP'
 		try {
-			sendkeys(rsvpInputCodigoRSVP, codigoRSVP);
+			validateStartFormRSVP();
+			sendkeys(rsvpInputCodigoRSVP, codeRSVP);
 			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Campo 'Código RSVP' encontrado com sucesso");
 		} catch (Exception e) {
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao inserir informação 'Código RSVP'");
@@ -141,7 +145,7 @@ public class PageHome extends BasePage {
 		
 		//Clicar no botão 'Verificar Código'
 		try {
-			click(rsvpInputCodigoRSVP);
+			submit(rsvpInputCodigoRSVP);
 			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Botão 'Verificar Código' acionado com sucesso");
 		} catch (Exception e) {
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao clicar no botão 'Verificar Código'");
@@ -150,13 +154,14 @@ public class PageHome extends BasePage {
 		
 	}
 	
-	public void validadeFieldNameRSVP(String name) throws IOException {
+	public void validadeFieldNameRSVP(String name) throws IOException, InterruptedException {
 		
 		//Verificar informação 'Nome' da massa de teste
 		if (elementExist(rsvpFieldName)) {
 			
-			String valueFieldName = rsvpFieldName.getText();
-			if (valueFieldName == name) {
+			String valueFieldName = getValue(rsvpFieldName);
+			if (name.equalsIgnoreCase(valueFieldName)) {
+				scrollToElementJavascript(rsvpHeaderArea);
 				TestRunner.addStepPassed(BasePage.getClassMethod(this), "Campo 'Nome' encontrado com valor " + valueFieldName);
 			} else {
 				TestRunner.addStepFailed(BasePage.getClassMethod(this), "Nomes divergem - Coletado: " + valueFieldName +" // Informado: " + name);
@@ -206,14 +211,14 @@ public class PageHome extends BasePage {
 		//Enviar resposta
 		try {
 			if (answer.equalsIgnoreCase("sim")) {
-				rsvpInputRadioSim.click();
+				click(rsvpInputRadioSim);
 				TestRunner.addStepPassed(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' selecionada com sucesso");
-				rsvpButtonEnviar.click();
+				submit(rsvpButtonEnviar);
 				TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' enviada com sucesso");
 			} else {
-				rsvpInputRadioNao.click();
+				click(rsvpInputRadioNao);
 				TestRunner.addStepPassed(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' selecionada com sucesso");
-				rsvpButtonEnviar.click();
+				submit(rsvpButtonEnviar);
 				TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Resposta '" + answer.toLowerCase() + "' enviada com sucesso");
 			}
 		} catch (Exception e) {
@@ -240,6 +245,7 @@ public class PageHome extends BasePage {
 	
 	private void validateReloadFormRSVP() throws IOException {
 		
+		//Validar formulário RSVP apto para reload
 		if (elementExist(rsvpFieldRelaoadFormRSVP)) {
 			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Link para reiniciar o formulário RSVP localizado com sucesso");
 		} else {
@@ -251,10 +257,11 @@ public class PageHome extends BasePage {
 	
 	public void reloadFormRSVP() throws IOException {
 		
+		//Efetuar reload formulário RSVP
 		validateReloadFormRSVP();
 		
 		try {
-			rsvpFieldRelaoadFormRSVP.click();
+			click(rsvpFieldRelaoadFormRSVP);
 			validateStartFormRSVP();
 			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Formulário RSVP reiniciado com sucesso");
 		} catch (Exception e) {

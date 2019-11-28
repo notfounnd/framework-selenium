@@ -1,6 +1,8 @@
 {
 	
+	"site": "http://test.juniorsbrissa.com",
 	"codigoRSVP": "COD001TESTE",
-	"nome": "Aaron Doe"
+	"nome": "Aaron Doe",
+	"resposta": "Não"
 	
 }

@@ -29,7 +29,6 @@ public class FolderHelper {
 		try {
 			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Diretório criado: " + path);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -44,7 +43,6 @@ public class FolderHelper {
 			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Diretório renomeado de: " +path+ "/Para: " +pathRename);
 			directory.renameTo(newNameDirectory);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
