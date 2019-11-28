@@ -19,7 +19,7 @@ public class BaseExtentReports {
 	
 	public void startTest(String testSuite) {
 		try {
-			report = new ExtentReports(TestRunner.folderExecution+ "\\" +testSuite+ ".html", true);
+			report = new ExtentReports(TestRunner.folderExecution+ "\\" + testSuite + ".html", true);
 			report.loadConfig(new File("C:\\Temp\\Reports\\config.xml"));
 			test = report.startTest(testSuite);
 		} catch (Exception e) {

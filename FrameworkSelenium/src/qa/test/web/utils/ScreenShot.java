@@ -64,7 +64,7 @@ public class ScreenShot {
 	private static String saveScreenShot() throws IOException {
         //String dest = System.getProperty("user.dir") +"\\report\\screenshots\\" + dateLog + screenShotName+ ".png";
         dest = TestRunner.folderScreenShots + "\\" + dateLog + screenShotName+ ".png";
-        TestRunner.addStepInfo(ScreenShot.class.toString(), "Evidêcia salva com sucesso no caminho: " + dest);
+        TestRunner.addStepInfo(ScreenShot.class.toString(), "Evidência salva com sucesso no caminho: " + dest);
         
         destination = new File(dest);
         FileUtils.copyFile(source, destination);        

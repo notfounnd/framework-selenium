@@ -11,7 +11,6 @@ public class PageExemplo extends BasePage {
 
 	public PageExemplo(WebDriver driver) {
 		super(driver);
-		// TODO Auto-generated constructor stub
 		PageFactory.initElements(driver, this);
 	}
 	

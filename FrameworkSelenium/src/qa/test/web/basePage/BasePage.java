@@ -9,17 +9,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 
 import qa.test.web.basePage.TestRunner;
 
-//@SuppressWarnings("rawtypes")
-
 public class BasePage {
-	
-	/*
-	 * Dev: Junior Sbrissa
-	 */
 	
 	protected WebDriver driver;
 	protected WebDriverWait wait;
@@ -42,6 +37,7 @@ public class BasePage {
 
 	public boolean elementExist(WebElement element) throws IOException {
 		try {
+			scrollToElementJavascript(element);
 			wait.until(ExpectedConditions.visibilityOf(element));
 			return true;
 		} catch (Exception e) {
@@ -64,21 +60,27 @@ public class BasePage {
 		waitToBeClickable(element);
 		element.click();
 		element.sendKeys(text);
-		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Texto '" + text + "' enviado ao elemento com a referência " + getLocator(element));
+		TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Texto '" + text + "' enviado ao elemento com a referência " + getLocator(element));
 		}
 	
-	public String getValues(WebElement element) throws IOException {
+	public String getValue(WebElement element) throws IOException {
 
 		waitVisibility(element);
-		String valor = element.getText();
-		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Valor '" + valor + "' encontrado " + getLocator(element));
-		return valor;
+		String value = element.getText();
+		TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Valor '" + value + "' encontrado " + getLocator(element));
+		return value;
 		}
 
 	public void click(WebElement element) throws IOException {
 		waitToBeClickable(element);
 		element.click();
-		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Click realizado no elemento com a referência " + getLocator(element));
+		TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Click realizado no elemento com a referência " + getLocator(element));
+	}
+	
+	public void submit(WebElement element) throws IOException {
+		waitToBeClickable(element);
+		element.submit();
+		TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Click realizado no elemento com a referência " + getLocator(element));
 	}
 
 	public void clickByCoordinates(WebElement element, int x, int y) throws IOException {
@@ -88,7 +90,7 @@ public class BasePage {
 		action.click();
 		action.build();
 		action.perform();
-		TestRunner.addStepPassed(BasePage.getClassMethod(this), "Click por coordenada realizado no elemento com a referência " + getLocator(element) + " (x: " + x + ", y: " + y + ")");
+		TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Click por coordenada realizado no elemento com a referência " + getLocator(element) + " (x: " + x + ", y: " + y + ")");
 	}
 	
 	/** 
@@ -171,7 +173,7 @@ public class BasePage {
 		
 		try {
 			element.sendKeys(key);
-			TestRunner.addStepPassed(BasePage.getClassMethod(this), "Tecla '" + key.toString() + "' pressionada");
+			TestRunner.addStepPassedNoPrint(BasePage.getClassMethod(this), "Tecla '" + key.toString() + "' pressionada");
 			//Exemplo de uso
 			//keyBoardEvent(Keys.LEFT_CONTROL, driver.findElement(By.tagName("body")) );
 		} catch (Exception e) {
@@ -198,5 +200,16 @@ public class BasePage {
 	
 	public static String getClassMethod(Object object) {
 		return object.getClass().toString();
+	}
+	
+	public void scrollToElementSelenium(WebElement element) {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element);
+		actions.perform();
+	}
+	
+	public void scrollToElementJavascript(WebElement element) throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		Thread.sleep(500); 
 	}
 }

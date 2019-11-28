@@ -24,6 +24,7 @@ public class Browser {
 	ArrayList<String> tabs;
 	
 	public Browser(){
+		//super();
 		//PageFactory.initElements(driver, this);
 	}
 	
@@ -70,7 +71,7 @@ public class Browser {
 		}
     }
 	
-	public void openBrowser(String navegador, PageLoadStrategy pageLoadStrategy) throws IOException {
+	public WebDriver openBrowser(String navegador, PageLoadStrategy pageLoadStrategy) throws IOException {
 		navegador = navegador.toUpperCase();
 		try {
 			switch(navegador) {
@@ -97,6 +98,8 @@ public class Browser {
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao tentar abrir o navegador " + navegador.toLowerCase());
 			Assert.fail();
 		}
+		
+		return driver;
 	}
 	
 	public void closeBrowser() throws IOException {

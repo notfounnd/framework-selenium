@@ -1,11 +1,9 @@
 package qa.test.web.basePage;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.internal.runners.TextListener;
@@ -14,19 +12,17 @@ import org.junit.runner.Request;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import com.relevantcodes.extentreports.ExtentReports;
-
 import qa.test.web.utils.BaseExtentReports;
 import qa.test.web.utils.FolderHelper;
-import qa.test.web.utils.ScreenShot;
 import qa.test.web.utils.TextHelper;
+
+//import java.io.File;
+//import java.util.Date;
+//import com.relevantcodes.extentreports.ExtentReports;
+//import qa.test.web.utils.ScreenShot;
 
 @SuppressWarnings({"unused"})
 public class TestRunner {
-	
-	/*
-	 * Dev: Junior Sbrissa
-	 */
 	
 	public  static String fileLog;
 	public  static String folderScenario;
@@ -37,7 +33,7 @@ public class TestRunner {
 	public  static String Scenario;
 	private static String dateLog;
 	private static String message;
-	private static String argsHardCoded = "qa.test.web.testDebug.TestDebug#CN001_CT001#Relatorio_Padrao.txt";
+	private static String argsHardCoded = "qa.test.web.com.juniorsbrissa.test.test.TestConsultaRSVP#CN001_CT001#Relatorio_Padrao.txt";
 	private static String[] parameters;
 	private static String[] testClassVet;
 	private static String[] argsIntern;
@@ -149,12 +145,11 @@ public class TestRunner {
 	
 	private static void initStructureFolder() throws IOException {
 		Scenario = testClass.replace(".", "#");
-		
 		testClassVet = Scenario.split("#");
 		count = testClassVet.length;
 		
-		folderScenario = "C:\\Temp\\Reports\\" +testClassVet[count-1];
-		folderExecution = folderScenario+ "\\Run_" +testMethod+ "_" +getTimeStampFolder()+ "_Execution";
+		folderScenario = "C:\\Temp\\Reports\\" + testClassVet[count-2] + "_" + testClassVet[count-1];
+		folderExecution = folderScenario+ "\\Run_" + testMethod + "_" + getTimeStampFolder() + "_Execution";
 		folderScreenShots = folderExecution+ "\\ScreenShots";		
 	}
 	
@@ -163,7 +158,12 @@ public class TestRunner {
 	}
 	
 	private static void initReport() throws IOException {
-		report = new BaseExtentReports(testClass +"_"+ testMethod);
+		Scenario = testClass.replace(".", "#");
+		testClassVet = Scenario.split("#");
+		count = testClassVet.length;
+		
+		//report = new BaseExtentReports(testClass + "_" + testMethod);
+		report = new BaseExtentReports(testClassVet[count-2] + "_" + testClassVet[count-1] + "_" + testMethod);
 	}
 	
 	private static void endReport() throws IOException {

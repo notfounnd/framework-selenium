@@ -48,16 +48,16 @@ public class JsonHelper {
 		
 	}
 
-	public String readJsonFile(String fileName, String key) throws ParseException, IOException {
+	public String readJsonFile(String className, String fileName, String key) throws ParseException, IOException {
 		
 		// Cria o parse de tratamento
 		parser = new JSONParser();
 
 		try {
 			// Salva no objeto JSONObject o que o parse tratou do arquivo
-			jsonObject = (JSONObject) parser.parse(new FileReader(System.getProperty("user.dir") + "\\qa.test.web.testData\\" + fileName + ".json"));
+			jsonObject = (JSONObject) parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\" + className.replace(".","\\") + "\\" + fileName + ".json"));
 			String value = (String) jsonObject.get(key);
-			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Lendo arquivo JSON: " + fileName  + " \\ Campo: " + key + " \\ Valor: " + value);
+			TestRunner.addStepInfo(BasePage.getClassMethod(this), "Package: " + className + " \\ Arquivo: " + fileName  + " \\ Campo: " + key + " \\ Valor: " + value);
 			return value;
 		} catch (Exception e) {
 			TestRunner.addStepFailed(BasePage.getClassMethod(this), "Erro ao tentar ler informação '" + key + "' no arquivo JSON '"+ fileName +"'");
