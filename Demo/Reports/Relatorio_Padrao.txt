@@ -1,0 +1,75 @@
+[2019-12-02 22:50:18][Info][qa.test.web.utils.FolderHelper] Diretório criado: C:\Temp\Reports\test_TestConsultaRSVP;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.utils.FolderHelper] Diretório criado: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.utils.FolderHelper] Diretório criado: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.utils.TextHelper] Arquivo existe: Relatorio_Padrao.txt;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.utils.TextHelper] Arquivo disponível para escrita: Relatorio_Padrao.txt;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.basePage.TestRunner] Início dos Testes;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.basePage.TestRunner] Total de parâmetros para início dos testes: 3;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.basePage.TestRunner] Classe de teste: qa.test.web.com.juniorsbrissa.test.test.TestConsultaRSVP;fimstep
+[2019-12-02 22:50:18][Info][qa.test.web.basePage.TestRunner] Método de teste: CN001_CT001;fimstep
+[2019-12-02 22:50:19][Info][qa.test.web.basePage.TestRunner] Arquivo de log: C:\Temp\Reports\Relatorio_Padrao.txt;fimstep
+[2019-12-02 22:50:24][Info][qa.test.web.utils.Browser] Navegador chrome iniciado com sucesso;fimstep
+[2019-12-02 22:50:24][Info][qa.test.web.utils.JsonHelper] Package: qa.test.web.com.juniorsbrissa.test.data \ Arquivo: COD001TESTE \ Campo: site \ Valor: http://test.juniorsbrissa.com;fimstep
+[2019-12-02 22:50:24][Info][qa.test.web.utils.JsonHelper] Package: qa.test.web.com.juniorsbrissa.test.data \ Arquivo: COD001TESTE \ Campo: codigoRSVP \ Valor: COD001TESTE;fimstep
+[2019-12-02 22:50:24][Info][qa.test.web.utils.JsonHelper] Package: qa.test.web.com.juniorsbrissa.test.data \ Arquivo: COD001TESTE \ Campo: nome \ Valor: Aaron Doe;fimstep
+[2019-12-02 22:50:24][Info][qa.test.web.utils.JsonHelper] Package: qa.test.web.com.juniorsbrissa.test.data \ Arquivo: COD001TESTE \ Campo: resposta \ Valor: Não;fimstep
+[2019-12-02 22:51:04][Info][qa.test.web.utils.Browser] Aguardando carregar página (até 30 segundos);fimstep
+[2019-12-02 22:51:05][Info][qa.test.web.utils.Browser] Status da página: complete;fimstep
+[2019-12-02 22:51:05][Passed][qa.test.web.utils.Browser] URL http://test.juniorsbrissa.com acessada sucesso;fimstep
+[2019-12-02 22:51:05][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-05-684_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:06][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Campo 'Código RSVP' encontrado com sucesso;fimstep
+[2019-12-02 22:51:06][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Botão 'Verificar Código' encontrado com sucesso;fimstep
+[2019-12-02 22:51:07][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Texto 'COD001TESTE' enviado ao elemento com a referência -> xpath: //div[@id='rsvpPlugin']//input[@id='firstName']];fimstep
+[2019-12-02 22:51:07][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Campo 'Código RSVP' encontrado com sucesso;fimstep
+[2019-12-02 22:51:07][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-07-661_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:10][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Click realizado no elemento com a referência 'By.xpath: //div[@id='rsvpPlugin']//input[@id='firstName']';fimstep
+[2019-12-02 22:51:11][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Botão 'Verificar Código' acionado com sucesso;fimstep
+[2019-12-02 22:51:11][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Valor 'Aaron Doe' encontrado -> xpath: //div[@id='rsvpPlugin']//span[@id='rsvpcParagraph']];fimstep
+[2019-12-02 22:51:12][Passed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Campo 'Nome' encontrado com valor Aaron Doe;fimstep
+[2019-12-02 22:51:12][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-12-801_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:12][Warning][qa.test.web.com.juniorsbrissa.test.page.PageHome] Timeout ao tentar encontrar o elemento'By.xpath: //div[@id='rsvpPlugin']//input[@id='mainRsvpY']';fimstep
+[2019-12-02 22:51:13][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-13-298_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:13][Warning][qa.test.web.com.juniorsbrissa.test.page.PageHome] Timeout ao tentar encontrar o elemento'By.xpath: //div[@id='rsvpPlugin']//input[@id='mainRsvpY']';fimstep
+[2019-12-02 22:51:13][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-13-843_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:13][Failed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Opção 'Sim' não foi encontrado;fimstep
+[2019-12-02 22:51:14][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-14-217_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:14][Warning][qa.test.web.com.juniorsbrissa.test.page.PageHome] Timeout ao tentar encontrar o elemento'By.xpath: //div[@id='rsvpPlugin']//input[@id='mainRsvpN']';fimstep
+[2019-12-02 22:51:14][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-14-658_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:14][Failed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Opção 'Não' não foi encontrado;fimstep
+[2019-12-02 22:51:14][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-14-994_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:15][Warning][qa.test.web.com.juniorsbrissa.test.page.PageHome] Timeout ao tentar encontrar o elemento'By.xpath: //div[@id='rsvpPlugin']//input[@type='submit' and contains(@value,'Enviar')]';fimstep
+[2019-12-02 22:51:15][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-15-382_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:15][Failed][qa.test.web.com.juniorsbrissa.test.page.PageHome] Botão 'Enviar' não foi encontrado;fimstep
+[2019-12-02 22:51:15][Info][qa.test.web.utils.ScreenShot] Evidência salva com sucesso no caminho: C:\Temp\Reports\test_TestConsultaRSVP\Run_CN001_CT001_2019_12_02_225017341_Execution\ScreenShots\2019-12-02_22-51-15-769_qa_test_web_utils_ScreenShot.png;fimstep
+[2019-12-02 22:51:16][Info][qa.test.web.utils.Browser] Navegador encerrado com sucesso;fimstep
+[2019-12-02 22:51:16][Failed][qa.test.web.com.juniorsbrissa.test.test.TestConsultaRSVP] [Stacktrace Error Execution]null
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.fail(Assert.java:95)
+	at qa.test.web.com.juniorsbrissa.test.page.PageHome.validateFormAnswerRSVP(PageHome.java:201)
+	at qa.test.web.com.juniorsbrissa.test.page.PageHome.setAnswerRSVP(PageHome.java:209)
+	at qa.test.web.com.juniorsbrissa.test.test.TestConsultaRSVP.CN001_CT001(TestConsultaRSVP.java:77)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)
+	at qa.test.web.basePage.TestRunner.initTest(TestRunner.java:175)
+	at qa.test.web.basePage.TestRunner.main(TestRunner.java:92)
+;fimstep
